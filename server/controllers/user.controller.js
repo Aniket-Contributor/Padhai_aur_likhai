@@ -8,6 +8,7 @@ import AppError from '../utils/AppError.js';
 import User from '../models/user.model.js';
 import sendEmail from '../utils/sendEmail.js';
 
+const token = await user.generateJWTToken();
 const cookieOptions = {
   secure: process.env.NODE_ENV === 'production' ? true : false,
   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -16,6 +17,7 @@ const cookieOptions = {
   secure : true,
   
 };
+res.cookie("token", token, cookieOption);
 
 /**
  * @REGISTER
