@@ -17,7 +17,7 @@ const cookieOptions = {
   secure : true,
   
 };
-res.cookie("token", token, cookieOption);
+
 
 /**
  * @REGISTER
