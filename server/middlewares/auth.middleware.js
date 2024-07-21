@@ -5,12 +5,9 @@ import asyncHandler from "./asyncHandler.middleware.js";
 
 export const isLoggedIn = asyncHandler(async (req, _res, next) => {
   // extracting token from the cookies
-  if(!req.cookies){
-    return next(new AppError("Cookies not found",400));
-  }
-  const token = req.cookies.token;
+  const { token } = await req.cookies;
   // Log token for debugging
-  
+  console.log('Token:', token);
 
   // If no token send unauthorized message
   if (!token) {
