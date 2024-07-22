@@ -1,7 +1,7 @@
 
 import User from '../models/user.model.js';
 import emailValidator from "email-validator";
-import bcrypt from "bcrypt";
+
 import AppError from '../utils/AppError.js';
 import cloudinary from "cloudinary";
 import fs from "fs/promises";
