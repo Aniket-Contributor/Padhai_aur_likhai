@@ -2,10 +2,7 @@ import jwt from "jsonwebtoken";
 
 import AppError from "../utils/AppError.js";
 import asyncHandler from "./asyncHandler.middleware.js";
-import cookieParser from 'cookie-parser';
 
-// Assuming you're using Express
-app.use(cookieParser());
 
 
 export const isLoggedIn = asyncHandler(async (req, _res, next) => {
