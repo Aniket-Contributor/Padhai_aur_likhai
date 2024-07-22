@@ -9,14 +9,14 @@ import User from '../models/user.model.js';
 import sendEmail from '../utils/sendEmail.js';
 
 
-const cookieOptions = {
-  secure: process.env.NODE_ENV === 'production' ? true : false,
-  maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-  httpOnly: true,
-  sameSite : "strict",
-  secure : true,
+// const cookieOptions = {
+//   secure: process.env.NODE_ENV === 'production' ? true : false,
+//   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+//   httpOnly: true,
+//   sameSite : "strict",
+//   secure : true,
   
-};
+// };
 
 
 /**
@@ -89,15 +89,23 @@ export const registerUser = asyncHandler(async (req, res, next) => {
 
   // Save the user object
   await user.save();
+  user.password = undefined;
 
   // Generating a JWT token
   const token = await user.generateJWTToken();
+  const cookieOption = {
+      maxAge: 24 * 60 * 60 * 1000, //for one day
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    };
+  res.cookie("token", token, cookieOption);
 
   // Setting the password to undefined so it does not get sent in the response
-  user.password = undefined;
+  
 
   // Setting the token in the cookie with name token along with cookieOptions
-  res.cookie('token', token, cookieOptions);
+  // res.cookie('token', token, cookieOptions);
 
   // If all good send the response to the frontend
   res.status(201).json({
