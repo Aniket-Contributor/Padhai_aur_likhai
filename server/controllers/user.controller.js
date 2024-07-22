@@ -1,4 +1,4 @@
-import errorMiddleware from "../middleware/error.middleware.js";
+
 import User from '../models/user.model.js';
 import emailValidator from "email-validator";
 import bcrypt from "bcrypt";
